@@ -26,15 +26,11 @@ class AgendasFilter(BaseFilterBackend):
         especialides = request.query_params.getlist('especialidade')
         data_inicio = request.query_params.get('data_inicio', hoje)
         data_fim = request.query_params.get('data_final', mais_trinta_dias)
-        
-        agendas = queryset.filter(
+        return queryset.filter(
             medico__in=medico,
             medico__especialidade__id__in=especialides,
             dia__range=[data_inicio, data_fim],
         )
-
-        # for items values
-        return agendas
 
 
 class ConsultasFilter(BaseFilterBackend):
@@ -58,17 +54,7 @@ class ConsultasFilter(BaseFilterBackend):
 class FilterToDestroy():
 
     def fetch(self, user, pk):
-        base_queryset = Consultas.annotate(
-            data_hora=models.functions.Concat(
-                'agenda__dia',
-                models.Value(' '),
-                'horario__hora',
-                output_field=models.DateTimeField()
-            )
-        )
-
-        return base_queryset.filter(
-            data_hora__gte=datetime.today(),
+        return Consultas.objects.filter(
             user=user,
             pk=pk
         )

@@ -80,6 +80,7 @@ class Consultas (models.Model):
         Horas,
         on_delete=models.CASCADE
     )
+    
     data_agendamento = models.DateTimeField(
         default=timezone.now(),
         editable=False

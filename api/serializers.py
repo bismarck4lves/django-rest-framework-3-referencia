@@ -23,37 +23,36 @@ class MedicosSerializer(serializers.ModelSerializer):
 class AgendasSerializer(serializers.ModelSerializer):
 
     medico = MedicosSerializer(many=False, read_only=True)
+
     horario = serializers.SlugRelatedField(
         many=True,
         read_only=True,
         slug_field='hora',
     )
 
-    def to_representation(self, instance):
+    # def to_representation(self, instance):
+    #     data = super(AgendasSerializer, self).to_representation(instance)
 
-        data = super(AgendasSerializer, self).to_representation(instance)
+    #     def valida_datas(dia, hora, agenda_id):
 
-        def valida_datas(dia, hora, agenda_id):
+    #         horario = Horas.objects.get(hora=hora)
 
-            horario = Horas.objects.get(hora=hora)
+    #         expirado = Validators().data_expirada(dia, hora)
+    #         if expirado:
+    #             return False
 
-            expirado = Validators().data_expirada(dia, hora)
-            if expirado:
-                return False
+    #         em_uso = Validators().consulta_disponivel(horario.pk, agenda_id)
+    #         if em_uso:
+    #             return False
 
-            em_uso = Validators().consulta_disponivel(horario.pk, agenda_id)
-            if em_uso:
-                return False
+    #         return True
 
-            return True
+    #     data['horario'] = list(
+    #         filter(lambda hora: valida_datas(data['dia'], hora, data['id']),
+    #                data['horario'])
+    #     )
 
-        data['horario'] = list(
-            filter(lambda hora: valida_datas(data['dia'], hora, data['id']),
-                   data['horario'])
-        )
-        if not data['horario']:
-            return None
-        return data
+    #     return data
 
     class Meta:
         model = Agendas
