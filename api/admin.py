@@ -4,30 +4,32 @@ from api.forms import AgendaForm
 from api.models import Agendas, Consultas, Especialidades, Horas, Medicos
 
 
-admin.site.site_header = 'Medicar Admin'
+admin.site.site_header = "Medicar Admin"
 
 
-@admin.register(Agendas)
-class AgendasAdmin (admin.ModelAdmin):
+class AgendasAdmin(admin.ModelAdmin):
     form = AgendaForm
-    list_display = ['id', 'medico', 'dia']
+    list_display = ["id", "medico", "dia"]
 
 
-@admin.register(Especialidades)
 class EspecialidadesAdmin(admin.ModelAdmin):
-    list_display = ['id', 'nome']
+    list_display = ["id", "nome"]
 
 
-@admin.register(Medicos)
 class MedicosAdmin(admin.ModelAdmin):
-    list_display = ['id', 'crm', 'nome', 'email', 'telefone', 'especialidade']
+    list_display = ["id", "crm", "nome", "email", "telefone", "especialidade"]
 
 
-@admin.register(Horas)
-class HorasAdmin (admin.ModelAdmin):
-    list_display = ['id', 'hora', 'status']
+class HorasAdmin(admin.ModelAdmin):
+    list_display = ["id", "hora"]
 
 
-@admin.register(Consultas)
-class ConsultasAdmin (admin.ModelAdmin):
-    list_display = ['id', 'agenda', 'horario', 'data_agendamento', 'user']
+class ConsultasAdmin(admin.ModelAdmin):
+    list_display = ["id", "agenda", "horario", "data_agendamento", "user"]
+
+
+admin.site.register(Agendas, AgendasAdmin)
+admin.site.register(Medicos, MedicosAdmin)
+admin.site.register(Consultas, ConsultasAdmin)
+admin.site.register(Especialidades, EspecialidadesAdmin)
+admin.site.register(Horas, HorasAdmin)

@@ -1,5 +1,5 @@
 from rest_framework import status, viewsets
-from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 
 from api.filters import AgendasFilter, MedicosFilter, ConsultasFilter, FilterToDestroy
