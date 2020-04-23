@@ -6,9 +6,10 @@ from api.models import Agendas
 
 
 class AgendaForm(forms.ModelForm):
+
     class Meta:
         model = Agendas
-        fields = ["dia", "medico", "horario"]
+        fields = ["dia", "medico"]
 
     def clean(self):
 

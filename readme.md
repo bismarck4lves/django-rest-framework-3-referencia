@@ -15,7 +15,7 @@ O sqlite3 já vem populado com dados para testar a aplicação. Porém, caso que
 O banco slqlite vem com um susperusuario ja cadastrado:
 
 	username: admin
-	password: bbb123
+	password: bbb123@medicar
 
 ##ENPOITS
 
@@ -36,3 +36,4 @@ O banco slqlite vem com um susperusuario ja cadastrado:
 
 
 
+	
